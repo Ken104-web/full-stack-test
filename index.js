@@ -9,13 +9,27 @@ const bookFiles = path.join(__dirname, "resources");
 
 // defining  Graphql schema
 const schema = buildSchema(
-    `type Query{
+    `
+    type Page {
+        pageIndex:Int
+        content: String
+    }
+    type Token {
+        position:[Int]
+        value: String
+    }
+    type PageWithTokens {
+        pageIndex: Int
+        content: String
+        tokens:[Token]
+    }
+    type Query{
         getBook(title: string!): Book
     }
     type Book{
         title: String
         author: String
-        pages: [PageTokens]
+        pages: [PageWithTokens]
     }
     `
 )
