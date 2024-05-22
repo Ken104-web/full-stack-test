@@ -1,9 +1,10 @@
 /* setting up a graphql server using express-graphql ,an HTTP middleware that will be leveraged by Express to rapidly create our API and express*/
-const express = require("express")
-const graphqlHTTP = require("express-graphql")
-const buildSchema = require('graphql')
-const path = require("path")
-const fs = require("fs")
+import express from "express";
+import { graphqlHTTP } from "express-graphql";
+import { buildSchema } from "graphql";
+import fs from 'fs';
+import path from 'path'
+
 const { title } = require("process")
 
 // where JOSN files will be stored
