@@ -5,10 +5,10 @@ import { buildSchema } from "graphql";
 import fs from 'fs';
 import path from 'path'
 
-const { title } = require("process")
+// const { title } = require("process")
 
 // where JOSN files will be stored
-const bookFiles = path.join(__dirname, "resources");
+const bookFiles = './books';
 
 // defining  Graphql schema
 const schema = buildSchema(
@@ -27,7 +27,7 @@ const schema = buildSchema(
         tokens:[Token]
     }
     type Query{
-        getBook(title: string!): Book
+        getBook(title: String!): Book
     }
     type Book{
         title: String
@@ -37,7 +37,7 @@ const schema = buildSchema(
     `
 );
     // defining funtion for query type
-    function getBook(title, bookFiles){
+    function getBook({ title }){
         // making a path for the requsted book
         const bookFilePath = path.join(bookFiles, `${title}.json`);
         try{
@@ -49,16 +49,16 @@ const schema = buildSchema(
     }
     // resolver
     const root ={
-        getBook: (title) => getBook(title, './books')
+        getBook: getBook,
     };
     // creating an express server and graphql endpoint
     const app = express();
     app.use(
         '/graphql',
         graphqlHTTP({
-            schema: schema,
+            schema,
             rootValue: root,
-            graphql: true,
+            graphiql: true,
         })
     );
     const PORT = 4000;
