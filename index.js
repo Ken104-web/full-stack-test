@@ -8,7 +8,7 @@ import path from 'path'
 // const { title } = require("process")
 
 // where JOSN files will be stored
-const bookFiles = './books';
+const bookFiles = path.resolve('./resources')
 
 // defining  Graphql schema
 const schema = buildSchema(
