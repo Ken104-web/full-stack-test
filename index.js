@@ -4,7 +4,7 @@ import { graphqlHTTP } from "express-graphql";
 import { buildSchema } from "graphql";
 import fs from 'fs';
 import path from 'path'
-
+import cors from 'cors'
 // const { title } = require("process")
 
 // where JOSN files will be stored
@@ -55,6 +55,7 @@ const schema = buildSchema(
     const app = express();
     app.use(
         '/graphql',
+        cors(),
         graphqlHTTP({
             schema,
             rootValue: root,
